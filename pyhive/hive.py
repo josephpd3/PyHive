@@ -203,7 +203,7 @@ class Connection(object):
                 self._transport = thrift.transport.THttpClient.THttpClient(
                     "http://{}:{}/{}".format(host, port, http_path)
                 )
-                credentials = base64.b64encode(username + ":" + password)
+                credentials = base64.b64encode((username + ":" + password).encode('utf-8'))
                 self._transport.setCustomHeaders({"Authorization": "Basic " + credentials})
             else:
                 raise NotImplementedError(
